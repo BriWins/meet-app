@@ -45,6 +45,8 @@
       const getURLElement = document.getElementById("getURL");
       const resultElement = document.getElementById("result");
       const resultLink = document.getElementById("authURL");
+      const headers = { "Access-Control-Allow-Origin": "*" };
+
       // Replace this with your own endpoint
       const getAuthURL =
         "https://h9tcgsg254.execute-api.eu-central-1.amazonaws.com/dev/api/get-auth-url";
@@ -52,7 +54,7 @@
       getURLElement.onclick = function () {
         fetch(getAuthURL)
           .then(function (response) {
-            return response.json();
+            return headers, response.json();
           })
           .then(function (json) {
             const result = JSON.stringify(json);
@@ -72,7 +74,7 @@
       const getToken =
         "https://h9tcgsg254.execute-api.eu-central-1.amazonaws.com/dev/api/token";
 
-        const headers = { "Access-Control-Allow-Origin": "*" };
+   
 
       getAccessToken.onclick = function () {
         let code = codeValue.value;
@@ -83,7 +85,7 @@
         }
         const getTokenRequest = getToken +  "/" + code;
         fetch(getTokenRequest)
-          .then(function (response) {
+          .then(function (headers, response) {
             return headers, response.json();
           })
           .then(function (json) {
