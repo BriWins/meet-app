@@ -87,9 +87,11 @@
           getEvents.onclick = function () {
             const { access_token } = JSON.parse(accessTokenElement.innerText);
             const eventRequest = getCalendarEvents + "/" + access_token;
+            const headers = { "Access-Control-Allow-Origin": "*" };
+
             fetch(eventRequest)
               .then(function (response) {
-                return response.json();
+                return headers, response.json();
               })
               .then(function (json) {
                 events.innerText = JSON.stringify(json, null, 2);
