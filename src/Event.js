@@ -4,14 +4,16 @@ import React, { Component } from "react";
 class Event extends Component {
 
   state = {
-    collapsed: true,
+    collapsed: true || false
+  }
+
+  handleExpandDetail = () => {
+   this.setState({ collapsed: false }); 
   };
 
-  handleClick = () => {
-    this.state.collapsed
-    ? this.setState({ collapsed: false }) 
-    : this.setState({ collasped: true });
-  }
+  handleCloseDetail = () => {
+   this.setState({ collapsed: true }); 
+  };
 
   render() {
 
@@ -20,7 +22,9 @@ class Event extends Component {
       <h4 className="title"></h4>
       <p className="start-time"></p>
       <p className="location"></p>
-      <button className="btn-details" onClick= {() => this.handleClick}></button>
+      <p className="summary"></p>
+      <button className="btn-details" onClick={this.handleExpandDetail }></button>
+      <button className="btn-collapse" onClick={this.handleCloseDetail}></button>
     </div>
     );
   }

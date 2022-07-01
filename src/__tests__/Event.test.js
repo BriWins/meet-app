@@ -25,18 +25,29 @@ describe('<Event/> component', () => {
     test('render event location', () => {
         expect(EventWrapper.find('.location')).toHaveLength(1);
     });
+    test('render event summary', () => {
+        expect(EventWrapper.find('.summary')).toHaveLength(1);
+    });
 
     test('render button for details', () => {
         expect(EventWrapper.find('.btn-details')).toHaveLength(1);
     });
 
+    test('event is collapsed by default', () => {
+        expect(EventWrapper.state('collapsed')).toBe(true);
+    });
+
     test('expand details on click', () => {
         EventWrapper.setState({ collapsed: false });
         EventWrapper.find('.btn-details').simulate('click');
-        expect(EventWrapper.state('collasped')).toBe(false);
+        expect(EventWrapper.state('collapsed')).toBe(false);
     });
 
-  
+    test('collapse event details on click', () => {
+        EventWrapper.setState({ collapsed: false });
+        EventWrapper.find('.btn-collapse').simulate('click');
+        expect(EventWrapper.state('collapsed')).toBe(true);
+      });
 
 
 });
