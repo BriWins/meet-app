@@ -29,8 +29,12 @@ describe('<Event/> component', () => {
         expect(EventWrapper.find('.summary')).toHaveLength(1);
     });
 
-    test('render button for details', () => {
+    test('render expand details button', () => {
         expect(EventWrapper.find('.btn-details')).toHaveLength(1);
+    });
+
+    test('render hide details button', () => {
+        expect(EventWrapper.find('.btn-collapse')).toHaveLength(1);
     });
 
     test('event is collapsed by default', () => {
