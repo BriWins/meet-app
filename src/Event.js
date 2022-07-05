@@ -4,7 +4,7 @@ import React, { Component } from "react";
 class Event extends Component {
 
   state = {
-    collapsed: true || false
+    collapsed: true 
   }
 
   handleExpandDetail = () => {
