@@ -2,6 +2,7 @@
 import React, { Component } from "react";
 
 class Event extends Component {
+ 
 
   state = {
     collapsed: true 
@@ -17,9 +18,11 @@ class Event extends Component {
 
   render() {
 
+    const { event } = this.props;
+    
     return (
     <div className="event">
-      <h4 className="title"></h4>
+      <h4 className="title">{event.summary}</h4>
       <p className="start-time"></p>
       <p className="location"></p>
       <p className="summary"></p>
