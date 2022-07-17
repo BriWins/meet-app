@@ -2,8 +2,7 @@ import React, { Component } from "react";
 
 export class NumberOfEvents extends Component {
   state = {
-    numberOfEvents: 32,
-    userInput: "",
+    numberOfEvents: "32",
   };
 
   handleUserInput = (event) => {
@@ -13,7 +12,7 @@ export class NumberOfEvents extends Component {
     } else {
       this.setState({ ErrorText: "Please select at least one event." });
     }
-    this.props.updateEvents(null, value);
+    this.props.updateEvents(undefined, value);
   };
 
   render() {
@@ -23,7 +22,7 @@ export class NumberOfEvents extends Component {
         <input
           className="default-input"
           id="user-number-input"
-          value={this.state.numberOfEvents || this.state.userInput}
+          value={this.state.numberOfEvents}
           onChange={this.handleUserInput}
         />
         <p></p>

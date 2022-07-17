@@ -61,8 +61,8 @@ class App extends Component {
 render() {
     return (
       <div className="App">
-        <EventList events={this.state.events}/>
         <NumberOfEvents/>
+        <EventList events={this.state.events}/>
         </div>
     );
   }
