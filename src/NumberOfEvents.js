@@ -3,7 +3,7 @@ import { ErrorAlert } from "./Alert";
 
 export class NumberOfEvents extends Component {
   state = {
-    numberOfEvents: "",
+    numberOfEvents: 32,
     userInput: "",
   };
 
@@ -28,7 +28,6 @@ export class NumberOfEvents extends Component {
     //     })
     //   }
   
-
   render() {
     return (
       <div>
