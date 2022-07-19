@@ -3,7 +3,7 @@ import { ErrorAlert } from "./Alert";
 
 export class NumberOfEvents extends Component {
   state = {
-    numberOfEvents: "32",
+    numberOfEvents: "",
   };
 
   handleUserInput = (event) => {

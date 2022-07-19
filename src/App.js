@@ -85,7 +85,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-          <OfflineAlert text={this.state.OfflineAlert} />
+         
         <CitySearch
           locations={this.state.locations}
           updateEvents={this.updateEvents}
@@ -95,6 +95,7 @@ class App extends Component {
           updateEvents={this.updateEvents}
         />
         <EventList events={this.state.events} />
+        <OfflineAlert text={this.state.OfflineAlert} />
       </div>
     );
   }

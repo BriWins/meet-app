@@ -29,7 +29,7 @@ input[type="number"] {
   padding: 8px 6px 8px 10px;
   border-radius: 4px;
   outline: none;
-  border: 1px solid rgb(244, 216, 253);
+  border: 2px solid rgb(135, 0, 181);
   font-size: 14px;
   line-height: 30px;
   align-self: center;
@@ -130,7 +130,7 @@ input[type="number"] {
 
 .Alert {
   position: fixed;
-  top: 20px;
+  top: 50px;
 }
 
 .data-vis-wrapper {
