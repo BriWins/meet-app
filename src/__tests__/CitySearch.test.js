@@ -1,80 +1,83 @@
-import React from 'react';
-import { shallow } from 'enzyme';
-import CitySearch from '../CitySearch';
-import { mockData } from '../mock-data';
-import { extractLocations } from '../api';
+import React, { Component } from "react";
+import { InfoAlert } from "./Alert";
 
-describe('<CitySearch /> component', () => {
-    let locations, CitySearchWrapper;
-  beforeAll(() => {
-    locations = extractLocations(mockData);
-    CitySearchWrapper = shallow(<CitySearch locations={locations} updateEvents={() => {}}/>);
-  });
+class CitySearch extends Component {
+  state = {
+    query: "",
+    suggestions: [],
+    showSuggestions: undefined,
+  };
 
-  test('render text input', () => {
-    expect(CitySearchWrapper.find('.city')).toHaveLength(1);
-  });
-
-  test('renders a list of suggestions', () => {
-    expect(CitySearchWrapper.find('.suggestions')).toHaveLength(1);
-  });
-
-  test('renders text input correctly', () => {
-    const query = CitySearchWrapper.state('query');
-    expect(CitySearchWrapper.find('.city').prop('value')).toBe(query);
-  });
-  
-  test('change state when text input changes', () => {
-    CitySearchWrapper.setState({
-      query: 'Munich'
+  handleInputChanged = (event) => {
+    const value = event.target.value;
+    this.setState({ showSuggestions: true });
+    const suggestions = this.props.locations.filter((location) => {
+      return location.toUpperCase().indexOf(value.toUpperCase()) > -1;
     });
-    const eventObject = { target: { value: 'Berlin' }};
-    CitySearchWrapper.find('.city').simulate('change', eventObject);
-    expect(CitySearchWrapper.state('query')).toBe('Berlin');
-  });
-
-  test('render list of suggestions correctly', () => {
-    CitySearchWrapper.setState({ suggestions: locations });
-    const suggestions = CitySearchWrapper.state('suggestions');
-    expect(CitySearchWrapper.find('.suggestions li')).toHaveLength(suggestions.length + 1);
-    for (let i = 0; i < suggestions.length; i += 1) {
-      expect(CitySearchWrapper.find('.suggestions li').at(i).text()).toBe(suggestions[i]);
+    if (suggestions.length === 0) {
+      this.setState({
+        query: value,
+        infoText:
+          "We can not find the city you are looking for. Please try another city",
+      });
+    } else {
+      return this.setState({
+        query: value,
+        suggestions,
+        infoText: "",
+      });
     }
-  });
+  };
 
-  test('suggestion list match the query when changed', () => {
-    CitySearchWrapper.setState({ query: '', suggestions: [] });
-    CitySearchWrapper.find(".city").simulate("change", {
-      target: { value: "Berlin" },
+  handleItemClicked = (suggestion) => {
+    this.setState({
+      query: suggestion,
+      suggestions: [],
+      showSuggestions: false,
+      infoText: "",
     });
-    const query = CitySearchWrapper.state("query");
-    const filteredLocations = locations.filter((location) => {
-      return location.toUpperCase().indexOf(query.toUpperCase()) > -1;
-    });
-    expect(CitySearchWrapper.state("suggestions")).toEqual(filteredLocations);
-  });
+    this.props.updateEvents(suggestion);
+  };
 
-  test("selecting a suggestion should change query state", () => {
-    CitySearchWrapper.setState({
-      query: 'Berlin'  });
-    const suggestions = CitySearchWrapper.state('suggestions');
-    CitySearchWrapper.find('.suggestions li').at(0).simulate('click');
-    expect(CitySearchWrapper.state("query")).toBe(suggestions[0]);
-  });
+  render() {
+    return (
+      <div className="CitySearch">
+        <h1>Meet App</h1>
+        <h3>The place where learning meets the world!</h3>
 
-  test("selecting CitySearch input reveals the suggestions list", () => {
-    CitySearchWrapper.find('.city').simulate('focus');
-    expect(CitySearchWrapper.state('showSuggestions')).toBe(true);
-    expect(CitySearchWrapper.find('.suggestions').prop('style')).not.toEqual({ display: 'none' });
-  });
+        <input
+          type="text"
+          className="city"
+          placeholder="search a city"
+          value={this.state.query}
+          onChange={this.handleInputChanged}
+          onFocus={() => {
+            this.setState({ showSuggestions: true });
+          }}
+        />
+        <ul
+          className="suggestions"
+          style={this.state.showSuggestions ? {} : { display: "none" }}
+        >
+          {this.state.suggestions.map((suggestion) => (
+            <li
+              key={suggestion}
+              onClick={() => this.handleItemClicked(suggestion)}
+              className="city-suggestion"
+            >
+              {suggestion}
+            </li>
+          ))}
 
-  test("selecting a suggestion should hide the suggestions list", () => {
-    CitySearchWrapper.setState({
-      query: 'Berlin',
-      showSuggestions: undefined
-    });
-    CitySearchWrapper.find('.suggestions li').at(0).simulate('click');
-    expect(CitySearchWrapper.state('showSuggestions')).toBe(false);
-    expect(CitySearchWrapper.find('.suggestions').prop('style')).toEqual({ display: 'none' });
-  });
-});
+          <li onClick={() => this.handleItemClicked("all")}>
+            <b>See all cities</b>
+          </li>
+        </ul>
+
+        <InfoAlert text={this.state.infoText} />
+      </div>
+    );
+  }
+}
+
+export default CitySearch;
