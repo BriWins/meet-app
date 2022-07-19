@@ -7,12 +7,8 @@ class Event extends Component {
     collapsed: true 
   }
 
-  handleExpandDetail = () => {
-   this.setState({ collapsed: false }); 
-  };
-
-  handleCloseDetail = () => {
-   this.setState({ collapsed: true }); 
+  handleClick = () => {
+    this.setState({ collapsed: !this.state.collapsed });
   };
 
   parseDate(date){
@@ -22,22 +18,27 @@ class Event extends Component {
     return day +' |  '+time;
   
     }
-  render() {
 
-    const { event } = this.props;
-
-    return (
-    <div className="event">
-      <h4 className="title">{event.summary}</h4>
-      <p className="start-time">{this.parseDate(event.start.dateTime)} ({event.start.timeZone})</p>
-      <p className="location">{event.location}</p>
-      
-      <button className="btn-details" onClick={this.handleExpandDetail }>View Details</button>
-      <p className="extra-details summary">{event.description}</p>
-                          
-      <button className="btn-collapse" onClick={this.handleCloseDetail}>Close Details</button>
-    </div>
-    );
-  }
+    
+    render() {
+      const { event } = this.props;
+  
+      return (
+        <div className="event">
+          <h4 className="title">{event.summary}</h4>
+          <p className="start-time">
+            {this.parseDate(event.start.dateTime)} ({event.start.timeZone})
+          </p>
+          <p className="location">{event.location}</p>
+  
+          <button className="btn-details" onClick={this.handleClick}>
+            {!this.state.collapsed ? "Close Details" : "View Details"}
+          </button>
+          {!this.state.collapsed && (
+            <p className="event-description">{event.description}</p>
+          )}
+        </div>
+      );
+    }
 }
 export default Event;
