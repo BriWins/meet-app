@@ -1,57 +1,34 @@
-import { loadFeature, defineFeature } from "jest-cucumber";
-import React from "react";
-import { mount } from "enzyme";
-import NumberOfEvents from "../NumberOfEvents";
-import App from "../App";
+import React from 'react';
+import { shallow } from 'enzyme';
+import NumberOfEvents from '../NumberOfEvents';
 
-const feature = loadFeature("./src/features/specifyNumberOfEvents.feature");
+describe('<NumberOfEvents/> component', () => {
+    let NumberOfEventsWrapper;
+    beforeAll(() => {
+        NumberOfEventsWrapper = shallow(<NumberOfEvents/>)
+    })
 
-defineFeature(feature, (test) => {
-  let AppWrapper;
+    test('render textbox', () => {
+        NumberOfEventsWrapper = shallow(<NumberOfEvents updateEvents={() => {}} /> );
+    })
 
-  test("When user hasn't specified a number, 32 is the default number.", ({
-    given,
-    when,
-    then,
-  }) => {
-    given("the user is on the main page of the app", async () => {
-      AppWrapper = mount(<App />);
-    });
+    test('render 32 events by default', () => {
+        expect(NumberOfEventsWrapper.find('.default-input').get(0).props.value).toEqual(32);
+    })
 
-    when("the user hasn't specified a number of events", () => {
-      AppWrapper.update();
-    });
-
-    then("the default number of displayed events will be 32", () => {
-      expect(AppWrapper.find(".event")).toHaveLength(2);
-    });
-  });
-
-  test("User can change the number of events they want to see.", ({
-    given,
-    when,
-    then,
-  }) => {
-    given("the user is on the main page", async () => {
-      AppWrapper = mount(<App />);
-    });
-
-    when(
-      "the user set a number of events he or she wants to see in the “Number of events” box",
-      () => {
-        const NumberOfEventsWrapper = AppWrapper.find(NumberOfEvents);
-        NumberOfEventsWrapper.find("#user-number-input").simulate("change", {
-          target: { value: 1 },
+    test('user can change the number of events', () => {
+        NumberOfEventsWrapper.find('#user-number-input').simulate('change', {
+          target: { value: 10 },
         });
-      }
-    );
-
-    then("this number of events will be displayed", () => {
-      const NumberOfEventsWrapper = AppWrapper.find(NumberOfEvents);
-      NumberOfEventsWrapper.find("#user-number-input").simulate("change", {
-        target: { value: 1 },
+        expect(NumberOfEventsWrapper.state('numberOfEvents')).toEqual(10);
       });
-      expect(AppWrapper.state("numberOfEvents")).toEqual(1);
-    });
-  });
-});
+
+    test('user has to specify at least one event', () => {
+      NumberOfEventsWrapper.setState({ numberOfEvents: 32 });
+      NumberOfEventsWrapper.find('#events-number').simulate('change', {
+        target: { value: -1 },
+      });
+      expect(NumberOfEventsWrapper.state('numberOfEvents')).toEqual(32);
+      });
+
+})
