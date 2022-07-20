@@ -64,7 +64,7 @@ class App extends Component {
 
     if (!navigator.onLine) {
       this.setState({
-        offlineText: "Your're offline! The data was loaded from the cache.",
+        offlineText: "Your're offline! This data is being loaded from the cache.",
       });
     } else {
       this.setState({
@@ -78,9 +78,12 @@ class App extends Component {
   }
 
   render() {
+  
     return (
+
+ 
       <div className="App">
-         
+         <OfflineAlert text={this.state.OfflineAlert} />
         <CitySearch
           locations={this.state.locations}
           updateEvents={this.updateEvents}
@@ -90,7 +93,7 @@ class App extends Component {
           updateEvents={this.updateEvents}
         />
         <EventList events={this.state.events} />
-        <OfflineAlert text={this.state.OfflineAlert} />
+        
       </div>
     );
   }
