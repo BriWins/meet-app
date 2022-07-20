@@ -9,8 +9,12 @@
 }
 
 ul {
-  padding: 0;
+  padding: 5px 5px;
   list-style: none;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
 }
 
 p {
