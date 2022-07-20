@@ -76,8 +76,7 @@ const mockData = [{
         "useDefault": true
     },
     "eventType": "default"
-}
-
+},
 ];
 
 JSON.parse(JSON.stringify(mockData));

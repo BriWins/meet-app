@@ -6,6 +6,8 @@ import { OfflineAlert } from './Alert';
 import EventList from "./EventList";
 import CitySearch from "./CitySearch";
 import NumberOfEvents from "./NumberOfEvents";
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 class App extends Component {
   state = {
@@ -83,7 +85,7 @@ class App extends Component {
 
  
       <div className="App">
-          <OfflineAlert text={this.state.offlineText} />
+        <OfflineAlert text={this.state.offlineText} />
         <CitySearch
           locations={this.state.locations}
           updateEvents={this.updateEvents}
