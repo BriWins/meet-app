@@ -19,6 +19,10 @@ ul {
   justify-content: space-evenly;
 }
 
+input {
+  text-align: -webkit-match-parent;
+}
+
 p {
   margin: 5px 0;
 }
@@ -26,8 +30,10 @@ p {
 .display-none {
   display: none;
 }
+
 .showSuggestions {
   display: block;
+  position: relative;
 }
 
 input[type="text"],
@@ -61,18 +67,18 @@ input[type="number"] {
 
 .suggestions {
   width: 250px;
-  position: absolute;
-  z-index: 2;
+  position: relative;
+  z-index: 3;
   align-self: center;
   margin: 0;
-  top: 43px;
-  font-size: 14px;
+  /* top: 43px; */
+  font-size: 16px;
   box-shadow: 10px 10px 16px -12px rgba(0, 0, 0, 0.75);
 }
 
 .suggestions > li {
   text-align: left;
-  padding: 8px 6px 8px 10px;
+  padding: 8px 6px 8px 6px;
   background-color: #eee;
   cursor: default;
 }
@@ -94,6 +100,7 @@ input[type="number"] {
   border-radius: 4px;
   position: relative;
 }
+
 .mb-0 {
   margin-bottom: 0 !important;
 }
