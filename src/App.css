@@ -154,7 +154,6 @@ input[type="number"] {
 
 .Alert {
   position: fixed;
-  top: 50px;
 }
 
 .data-vis-wrapper {
