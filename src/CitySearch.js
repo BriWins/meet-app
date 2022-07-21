@@ -43,9 +43,6 @@ class CitySearch extends Component {
   render() {
     return (
       <div className="CitySearch">
-        <h1>Meet App</h1>
-        <h3>The place where learning meets the world!</h3>
-
         <input
           type="text"
           className="city"

@@ -6,6 +6,9 @@ import { OfflineAlert } from './Alert';
 import EventList from "./EventList";
 import CitySearch from "./CitySearch";
 import NumberOfEvents from "./NumberOfEvents";
+import {
+  ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer
+} from 'recharts';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 class App extends Component {
@@ -14,6 +17,16 @@ class App extends Component {
     locations: [],
     numberOfEvents: 32,
     currentLocation: "all",
+  };
+
+  getData = () => {
+    const {locations, events} = this.state;
+    const data = locations.map((location)=>{
+      const number = events.filter((event) => event.location === location).length
+      const city = location.split(', ').shift()
+      return {city, number};
+    })
+    return data;
   };
 
   updateEvents = (location, eventCount) => {
@@ -79,20 +92,34 @@ class App extends Component {
   }
 
   render() {
-  
+    const { locations, numberOfEvents, events } = this.state;
     return (
       <div className="App">
+        <h1>Meet App</h1>
+        <h4>The place where learning meets the world!</h4>
         <OfflineAlert text={this.state.offlineText} />
-        <CitySearch
-          locations={this.state.locations}
-          updateEvents={this.updateEvents}
-        />
+        <CitySearch updateEvents={this.updateEvents} locations={locations} />
         <NumberOfEvents
-          numberOfEvents={this.state.numberOfEvents}
           updateEvents={this.updateEvents}
-        />
-        <EventList events={this.state.events} />
-        
+          numberOfEvents={numberOfEvents}
+        />     
+
+         <h4>Events in each city</h4>
+        <ResponsiveContainer height={400} >
+          <ScatterChart margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
+            <CartesianGrid />
+            <XAxis type="category" dataKey="city" name="city" />
+            <YAxis
+              allowDecimals={false}
+              type="number"
+              dataKey="number"
+              name="number of events"
+            />
+            <Tooltip cursor={{ strokeDasharray: "3 3" }} />
+            <Scatter data={this.getData()} fill="#8884d8" />
+          </ScatterChart>
+        </ResponsiveContainer>
+        <EventList events={events} />
       </div>
     );
   }
