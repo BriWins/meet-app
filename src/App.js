@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import "./App.css";
-import { getEvents, extractLocations, checkToken } from "./api";
+import WelcomeScreen from './WelcomeScreen';
+import { getEvents, extractLocations, checkToken, getAccessToken } from
+'./api';
 import "./nprogress.css";
 import { OfflineAlert } from './Alert';
 import EventList from "./EventList";
@@ -17,6 +19,7 @@ class App extends Component {
     locations: [],
     numberOfEvents: 32,
     currentLocation: "all",
+    showWelcomeScreen: undefined,
   };
 
   getData = () => {
@@ -61,7 +64,12 @@ class App extends Component {
   async componentDidMount() {
     this.mounted = true;
     const accessToken = localStorage.getItem('access_token');
-    const isTokenValid = checkToken(accessToken).error ? false : true;
+    let isTokenValid;
+    if (accessToken && !navigator.onLine) {
+      isTokenValid = true;
+    } else {
+      isTokenValid = (await checkToken(accessToken)).error ? false : true;
+    }
     const searchParams = new URLSearchParams(window.location.search);
     const code = searchParams.get('code');
     this.setState({ showWelcomeScreen: !(code || isTokenValid) });
@@ -93,6 +101,9 @@ class App extends Component {
 
   render() {
     const { locations, numberOfEvents, events } = this.state;
+
+    if (this.state.showWelcomeScreen === undefined) return <div className="App" />
+
     return (
       <div className="App">
         <h1>Meet App</h1>
@@ -120,6 +131,8 @@ class App extends Component {
           </ScatterChart>
         </ResponsiveContainer>
         <EventList events={events} />
+        <WelcomeScreen showWelcomeScreen={this.state.showWelcomeScreen}
+getAccessToken={() => { getAccessToken() }} />
       </div>
     );
   }
