@@ -33,7 +33,7 @@ class="btn-text"
 
 </div>
 
-<a href="https://YOUR_GITHUB_USERNAME.github.io/meet/privacy.html" rel="nofollow noopener">
+<a href="https://BriWins.github.io/meet-app/privacy.html" rel="nofollow noopener">
 Privacy policy
 </a>
 </div>
