@@ -7,9 +7,10 @@ import "./nprogress.css";
 import { OfflineAlert } from './Alert';
 import EventList from "./EventList";
 import CitySearch from "./CitySearch";
+import EventGenre from "./EventGenre";
 import NumberOfEvents from "./NumberOfEvents";
 import {
-  ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer
+  ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, 
 } from 'recharts';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -116,6 +117,8 @@ class App extends Component {
         />     
 
          <h4>Events in each city</h4>
+         <div className="data-vis-wrapper">
+          <EventGenre events={events}/>
         <ResponsiveContainer height={400} >
           <ScatterChart margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
             <CartesianGrid />
@@ -130,6 +133,7 @@ class App extends Component {
             <Scatter data={this.getData()} fill="#8884d8" />
           </ScatterChart>
         </ResponsiveContainer>
+        </div>
         <EventList events={events} />
         <WelcomeScreen showWelcomeScreen={this.state.showWelcomeScreen}
 getAccessToken={() => { getAccessToken() }} />
