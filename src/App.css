@@ -196,8 +196,9 @@ input[type="number"] {
 .google-btn:active {
   background: #1669f2;
 }
+
 .google-icon-wrapper {
-  position: absolute;
+  /* position: absolute; */
   margin-top: 1px;
   margin-left: 1px;
   width: 40px;
@@ -206,8 +207,8 @@ input[type="number"] {
   background-color: #fff;
 }
 .google-icon {
-  position: absolute;
-  margin-top: 11px;
+  /* position: absolute; */
+  margin-top: 20px;
   margin-left: -8px;
   width: 18px;
   height: 18px;
