@@ -2,13 +2,11 @@ import React, { Component } from 'react';
 import Event from './Event';
 import { Container } from "react-bootstrap";
 
-
 class EventList extends Component {
-  render() {
+render() {
     const { events } = this.props;
-    // console.log(events);
     
-    return (
+return (
       <Container>
           <ul className="EventList">
             {events.map(event => 
@@ -19,7 +17,7 @@ class EventList extends Component {
           </ul>
           </Container>
         );
-  }
+    }
 }
 
 export default EventList;

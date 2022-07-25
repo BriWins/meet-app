@@ -5,7 +5,7 @@ const EventGenre = ({ events }) => {
   const [data, setData] = useState([]);
   const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 
-  const getData = () => {
+const getData = () => {
     const genres = ["React", "JavaScript", "Node", "jQuery", "AngularJS"];
     const data = genres.map((genre) => {
       const value = events.filter((event) =>
@@ -16,12 +16,12 @@ const EventGenre = ({ events }) => {
     return data;
   };
   
-  useEffect(() => {
+useEffect(() => {
     setData(()=> getData());}, 
     // eslint-disable-next-line
     [events]);
 
-  return (
+return (
     <ResponsiveContainer height={400}>
       <PieChart width={400} height={400}>
         <Pie

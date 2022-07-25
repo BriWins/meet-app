@@ -2,14 +2,12 @@ import { mockData } from './mock-data';
 import axios from 'axios';
 import NProgress from 'nprogress';
 
-
 export const checkToken = async (accessToken) => {
   const result = await fetch(
     `https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=${accessToken}`
   )
     .then((res) => res.json())
     .catch((error) => error.json());
-
   return result;
 };
 
@@ -18,13 +16,11 @@ const getToken = async (code) => {
   const { access_token } = await fetch(
     'https://h9tcgsg254.execute-api.eu-central-1.amazonaws.com/dev/api/token' + '/' + encodeCode
   )
-    .then((res) => {
+   .then((res) => {
       return res.json();
     })
     .catch((error) => error);
-
   access_token && localStorage.setItem("access_token", access_token);
-
   return access_token;
 };
 
@@ -78,7 +74,7 @@ export const extractLocations = (events) => {
     return locations;
   };
 
-  export const getAccessToken = async () => {
+export const getAccessToken = async () => {
     const accessToken = localStorage.getItem('access_token');
     const tokenCheck = accessToken && (await checkToken(accessToken));
 
@@ -96,5 +92,4 @@ export const extractLocations = (events) => {
       return code && getToken(code);
     }
     return accessToken;
- 
 }

@@ -2,12 +2,13 @@ import React, { Component } from "react";
 import { ErrorAlert } from "./Alert";
 
 export class NumberOfEvents extends Component {
-  state = {
+
+state = {
     numberOfEvents: 32,
     userInput: "",
   };
 
-  handleUserInput = (event) => {
+handleUserInput = (event) => {
     const value = event.target.value;
     if (!isNaN(value) && value >= 0 && value <= 32) {
       this.setState({ numberOfEvents: value, errorAlert: "" });
@@ -15,18 +16,7 @@ export class NumberOfEvents extends Component {
       this.setState({ errorAlert: "Select a number between 1 and 32" });
     } 
     this.props.updateEvents(undefined, value);
-  };
-    // if ( value <= 0 || value > 32) {
-    //   this.setState({
-    //     numberOfEvents: "",
-    //     errorAlert: "Select a number between 1 and 32"
-    //   }); 
-    // } else {
-    //     this.setState({
-    //       numberOfEvents: value,
-    //       errorAlert: ""
-    //     })
-    //   }
+};
   
   render() {
     return (

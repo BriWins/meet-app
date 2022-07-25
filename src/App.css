@@ -114,8 +114,7 @@ input[type="number"] {
   padding: 5px 8px;
   border-radius: 6px;
   outline: none;
-  cursor: pointer;
-  
+  cursor: pointer; 
 }
 
 .name {
@@ -149,7 +148,6 @@ input[type="number"] {
   grid-gap: 20px;
   padding: 20px;
   font-family: sans-serif;
-  
 }
 
 .Alert {
@@ -190,9 +188,11 @@ input[type="number"] {
   border-radius: 2px;
   box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.25);
 }
+
 .google-btn:hover {
   box-shadow: 0 0 6px #4285f4;
 }
+
 .google-btn:active {
   background: #1669f2;
 }
@@ -206,6 +206,7 @@ input[type="number"] {
   border-radius: 2px;
   background-color: #fff;
 }
+
 .google-icon {
   /* position: absolute; */
   margin-top: 20px;
@@ -213,6 +214,7 @@ input[type="number"] {
   width: 18px;
   height: 18px;
 }
+
 .btn-text {
   float: right;
   margin: 11px 11px 0 0;
@@ -221,8 +223,6 @@ input[type="number"] {
   letter-spacing: 0.2px;
   font-family: "Roboto";
 }
-
-
 
 @media only screen and (min-width: 992px) {
   .data-vis-wrapper {
